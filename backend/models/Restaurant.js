@@ -1,0 +1,1 @@
+// (Optional) Restaurant model helpers go here\n

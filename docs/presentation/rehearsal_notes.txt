@@ -1,0 +1,5 @@
+- Keep total presentation under 7 minutes.
+- Mohammad: intro + frontend demo (2 min)
+- Ayaan: database schema + ER diagram (2 min)
+- Ali: backend logic + API integration (2 min)
+- Mohamed: testing, report, conclusion (1 min)

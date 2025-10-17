@@ -1,0 +1,17 @@
+{
+  "name": "centralized-restaurant-reservation-system",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch backend/server.js",
+    "start": "node backend/server.js",
+    "db:seed": "echo 'Run schema + sample_data manually via MySQL Workbench for now'"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7",
+    "node-fetch": "^3.3.2"
+  }
+}

@@ -1,0 +1,14 @@
+### Quick REST tests (use VS Code REST Client)
+GET http://localhost:3000/api/restaurants
+
+###
+POST http://localhost:3000/api/restaurants
+Content-Type: application/json
+
+{
+  "name": "Sample Resto",
+  "location": "Toronto, ON",
+  "email": "info@example.com",
+  "opening_time": "11:00",
+  "closing_time": "22:00"
+}

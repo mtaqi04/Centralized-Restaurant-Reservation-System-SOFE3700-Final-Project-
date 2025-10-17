@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Search & Filter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h2>Search & Filter</h2>
+  <form id="searchForm">
+    <label>City <input name="city" required></label>
+    <label>Cuisine <input name="cuisine"></label>
+    <label>Date <input type="date" name="date"></label>
+    <button type="submit">Search</button>
+  </form>
+  <div id="results"></div>
+  <script src="validators.js"></script>
+  <script src="apiClient.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
