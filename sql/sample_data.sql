@@ -1,19 +1,3 @@
--- sample_data.sql
--- Populate the Centralized Restaurant Reservation System with realistic sample data.
--- Run AFTER schema.sql
-
--- OPTIONAL: clean tables (uncomment if needed and you understand FK constraints)
--- SET FOREIGN_KEY_CHECKS = 0;
--- TRUNCATE TABLE Restaurant_Cuisine;
--- TRUNCATE TABLE Reservation;
--- TRUNCATE TABLE Table_Info;
--- TRUNCATE TABLE Customer;
--- TRUNCATE TABLE Cuisine;
--- TRUNCATE TABLE Restaurant;
--- SET FOREIGN_KEY_CHECKS = 1;
-
--- ─────────────────────────────────────────────────────────────
--- RESTAURANTS  (6)
 INSERT INTO Restaurant (name, location, email, opening_time, closing_time) VALUES
 ('Bella Italia', 'Toronto, ON', 'contact@bellaitalia.ca', '11:00', '23:00'),
 ('SpiceHub', 'Ottawa, ON', 'hello@spicehub.ca', '10:00', '22:00'),
