@@ -25,3 +25,31 @@ CREATE TABLE IF NOT EXISTS Reservation (
   FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
   FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
 );
+
+CREATE TABLE IF NOT EXISTS Table_Info (
+  table_id INT AUTO_INCREMENT PRIMARY KEY,
+  restaurant_id INT NOT NULL,
+  capacity INT NOT NULL,
+  table_number INT NOT NULL,
+  UNIQUE KEY uk_restaurant_table (restaurant_id, table_number),
+  FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
+);
+
+CREATE TABLE IF NOT EXISTS Cuisine (
+  cuisine_id INT AUTO_INCREMENT PRIMARY KEY,
+  cuisine_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Restaurant_Cuisine (
+  restaurant_id INT NOT NULL,
+  cuisine_id INT NOT NULL,
+  PRIMARY KEY (restaurant_id, cuisine_id),
+  FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
+  FOREIGN KEY (cuisine_id) REFERENCES Cuisine(cuisine_id)
+);
+
+ALTER TABLE Reservation
+  ADD COLUMN table_id INT NULL,
+  ADD COLUMN num_people INT NULL,
+  ADD COLUMN status ENUM('Booked','Cancelled','Completed') DEFAULT 'Booked',
+  ADD CONSTRAINT fk_res_table FOREIGN KEY (table_id) REFERENCES Table_Info(table_id);
