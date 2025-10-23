@@ -23,7 +23,11 @@ CREATE TABLE IF NOT EXISTS Reservation (
   start_time TIME,
   end_time TIME,
   FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
-  FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
+  FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
+  table_id INT NULL,
+  num_people INT NULL,
+  status ENUM('Booked','Cancelled','Completed') DEFAULT 'Booked', 
+  CONSTRAINT fk_res_table FOREIGN KEY (table_id) REFERENCES Table_Info(table_id)
 );
 
 CREATE TABLE IF NOT EXISTS Table_Info (
@@ -47,9 +51,3 @@ CREATE TABLE IF NOT EXISTS Restaurant_Cuisine (
   FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
   FOREIGN KEY (cuisine_id) REFERENCES Cuisine(cuisine_id)
 );
-
-ALTER TABLE Reservation
-  ADD COLUMN table_id INT NULL,
-  ADD COLUMN num_people INT NULL,
-  ADD COLUMN status ENUM('Booked','Cancelled','Completed') DEFAULT 'Booked',
-  ADD CONSTRAINT fk_res_table FOREIGN KEY (table_id) REFERENCES Table_Info(table_id);
