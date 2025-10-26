@@ -27,8 +27,7 @@ JOIN Table_Info t ON rsv.table_id = t.table_id;
 Provides unified reservation details for reports and dashboards.
 
 **Sample Output:**
-*(see `/screenshots/view_full_reservation_info.png`)*
-
+docs/screenshots/view_full_reservation_info.png
 ---
 
 ### **View 2: view_popular_restaurants**
@@ -48,8 +47,7 @@ ORDER BY total_reservations DESC;
 ```
 
 **Sample Output:**
-*(see `/screenshots/view_popular_restaurants.png`)*
-
+docs/screenshots/view_popular_restaurants.png
 ---
 
 ### **View 3: view_available_tables**
@@ -70,8 +68,7 @@ WHERE t.table_id NOT IN (
 ```
 
 **Sample Output:**
-*(see `/screenshots/view_available_tables.png`)*
-
+docs/screenshots/view_available_tables.png
 ---
 
 ### **View 4: view_customer_history**
@@ -91,8 +88,7 @@ WHERE rs.reservation_date < CURDATE();
 ```
 
 **Sample Output:**
-*(see `/screenshots/view_customer_history.png`)*
-
+docs/screenshots/view_customer_history.png
 ---
 
 ### **View 5: view_cuisine_summary**
@@ -111,8 +107,7 @@ GROUP BY c.cuisine_name;
 ```
 
 **Sample Output:**
-*(see `/screenshots/view_cuisine_summary.png`)*
-
+docs/screenshots/view_cuisine_summary.png
 ---
 
 ### **View 6: view_reservations_by_day**
@@ -131,8 +126,7 @@ ORDER BY total_reservations DESC;
 ```
 
 **Sample Output:**
-*(see `/screenshots/view_reservations_by_day.png`)*
-
+docs/screenshots/view_reservations_by_day.png
 ---
 
 ### **View 7: view_active_bookings**
@@ -153,8 +147,7 @@ WHERE rsv.reservation_date >= CURDATE() AND rsv.status = 'Booked';
 ```
 
 **Sample Output:**
-*(see `/screenshots/view_active_bookings.png`)*
-
+docs/screenshots/view_active_bookings.png
 ---
 
 ### **View 8: view_table_utilization**
@@ -174,8 +167,7 @@ GROUP BY t.table_id, r.name;
 ```
 
 **Sample Output:**
-*(see `/screenshots/view_table_utilization.png`)*
-
+docs/screenshots/view_table_utilization.png
 ---
 
 ### **View 9: view_top_customers**
@@ -195,8 +187,7 @@ ORDER BY total_reservations DESC;
 ```
 
 **Sample Output:**
-*(see `/screenshots/view_top_customers.png`)*
-
+docs/screenshots/view_top_customers.png
 ---
 
 ### **View 10: view_cancelled_reservations**
@@ -216,6 +207,5 @@ WHERE rs.status = 'Cancelled';
 ```
 
 **Sample Output:**
-*(see `/screenshots/view_cancelled_reservations.png`)*
-
+docs/screenshots/view_cancelled_reservations.png
 ---
