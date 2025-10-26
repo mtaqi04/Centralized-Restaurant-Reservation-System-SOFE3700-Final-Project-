@@ -27,7 +27,7 @@ JOIN Table_Info t ON rsv.table_id = t.table_id;
 Provides unified reservation details for reports and dashboards.
 
 **Sample Output:**
-*(see `/docs/screenshots/view_full_reservation_info.png)*
+*(see `/docs/screenshots/view_full_reservation_info.png`)*
 
 ---
 
@@ -219,10 +219,3 @@ WHERE rs.status = 'Cancelled';
 *(see `/docs/screenshots/view_cancelled_reservations.png`)*
 
 ---
-
-### **Formatting Notes for Final Report:**
-
-* Each SQL block is formatted with monospace font.
-* Each figure should be captioned with its corresponding view name.
-* Ensure all screenshots are embedded in `/docs/screenshots/`.
-* Maintain numbering consistency for sections and figures before PDF export.
