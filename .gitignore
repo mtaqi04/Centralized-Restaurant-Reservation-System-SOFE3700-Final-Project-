@@ -3,6 +3,5 @@ node_modules/
 .DS_Store
 package-lock.json
 *.log
-/docs/*.pdf
 /docs/presentation/*.pptx
 /testlogs/
