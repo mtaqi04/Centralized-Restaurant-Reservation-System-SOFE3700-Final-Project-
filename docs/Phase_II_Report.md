@@ -1,4 +1,117 @@
-## Phase II Report – Views Section
+## Phase II Report – Restaurant Reservation System
+
+### 1. Introduction and Goals
+
+The Restaurant Reservation System was developed to streamline the process of managing restaurant reservations, customer data, and table allocations. The motivation behind this project is to reduce manual scheduling errors, prevent double-booking, and improve restaurant efficiency through data-driven insights.
+
+The main objectives of the system are:
+
+* To provide a centralized database for restaurant, customer, and reservation management.
+* To ensure referential integrity across all relational entities.
+* To support analytical queries and visual reporting using SQL views.
+* To enable future integration with web and mobile applications for real-time updates.
+
+---
+
+### 2. Relational Schema and SQL Code
+
+This section defines the relational schema, constraints, and data relationships used in the database. The design ensures data normalization and consistency across multiple interconnected entities.
+
+**Key Design Features:**
+
+* **Foreign Keys** maintain relationships between entities such as `Reservation`, `Customer`, and `Restaurant`.
+* **Primary Keys** uniquely identify records across all tables.
+* **Constraints** (e.g., `CHECK`, `UNIQUE`, `ENUM`) guarantee data validity.
+
+**SQL Schema:**
+
+```sql
+CREATE TABLE Restaurant (
+    restaurant_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    location VARCHAR(100),
+    email VARCHAR(100),
+    opening_time TIME,
+    closing_time TIME
+);
+
+CREATE TABLE Table_Info (
+    table_id INT AUTO_INCREMENT PRIMARY KEY,
+    restaurant_id INT NOT NULL,
+    capacity INT NOT NULL CHECK (capacity > 0),
+    table_number INT NOT NULL,
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE Customer (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(20)
+);
+
+CREATE TABLE Cuisine (
+    cuisine_id INT AUTO_INCREMENT PRIMARY KEY,
+    cuisine_name VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Restaurant_Cuisine (
+    restaurant_id INT NOT NULL,
+    cuisine_id INT NOT NULL,
+    PRIMARY KEY (restaurant_id, cuisine_id),
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (cuisine_id) REFERENCES Cuisine(cuisine_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE Reservation (
+    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    restaurant_id INT NOT NULL,
+    table_id INT NOT NULL,
+    reservation_date DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    num_people INT NOT NULL CHECK (num_people > 0),
+    status ENUM('Booked', 'Completed', 'Cancelled') DEFAULT 'Booked',
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (table_id) REFERENCES Table_Info(table_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+```
+
+**Screenshot Reference:**
+*(see `/docs/screenshots/schema_creation_output.png`)*
+
+---
+
+### 3. ER Diagram
+
+The Entity-Relationship (ER) diagram provides a visual overview of all entities and their relationships. It ensures database normalization and depicts how tables interconnect.
+
+**Entity Summaries:**
+
+* **Restaurant:** Stores details about each restaurant, including operating hours.
+* **Customer:** Contains personal and contact details for reservation tracking.
+* **Reservation:** Manages booking details, connecting customers and restaurants.
+* **Table_Info:** Represents tables with capacity and numbering.
+* **Cuisine & Restaurant_Cuisine:** Define restaurant categories and their associations.
+
+**ER Diagram:**
+![Figure 3.1 – ER Diagram of the Restaurant Reservation System](../docs/ER_Diagram.png)
+
+---
 
 ### 4. Views and Data Retrieval
 
@@ -27,7 +140,8 @@ JOIN Table_Info t ON rsv.table_id = t.table_id;
 Provides unified reservation details for reports and dashboards.
 
 **Sample Output:**
-docs/screenshots/view_full_reservation_info.png
+*(see `/docs/screenshots/view_full_reservation_info.png`)*
+
 ---
 
 ### **View 2: view_popular_restaurants**
@@ -47,7 +161,8 @@ ORDER BY total_reservations DESC;
 ```
 
 **Sample Output:**
-docs/screenshots/view_popular_restaurants.png
+*(see `/docs/screenshots/view_popular_restaurants.png`)*
+
 ---
 
 ### **View 3: view_available_tables**
@@ -68,7 +183,8 @@ WHERE t.table_id NOT IN (
 ```
 
 **Sample Output:**
-docs/screenshots/view_available_tables.png
+*(see `/docs/screenshots/view_available_tables.png`)*
+
 ---
 
 ### **View 4: view_customer_history**
@@ -88,7 +204,8 @@ WHERE rs.reservation_date < CURDATE();
 ```
 
 **Sample Output:**
-docs/screenshots/view_customer_history.png
+*(see `/docs/screenshots/view_customer_history.png`)*
+
 ---
 
 ### **View 5: view_cuisine_summary**
@@ -107,7 +224,8 @@ GROUP BY c.cuisine_name;
 ```
 
 **Sample Output:**
-docs/screenshots/view_cuisine_summary.png
+*(see `/docs/screenshots/view_cuisine_summary.png`)*
+
 ---
 
 ### **View 6: view_reservations_by_day**
@@ -126,7 +244,8 @@ ORDER BY total_reservations DESC;
 ```
 
 **Sample Output:**
-docs/screenshots/view_reservations_by_day.png
+*(see `/docs/screenshots/view_reservations_by_day.png`)*
+
 ---
 
 ### **View 7: view_active_bookings**
@@ -147,7 +266,8 @@ WHERE rsv.reservation_date >= CURDATE() AND rsv.status = 'Booked';
 ```
 
 **Sample Output:**
-docs/screenshots/view_active_bookings.png
+*(see `/docs/screenshots/view_active_bookings.png`)*
+
 ---
 
 ### **View 8: view_table_utilization**
@@ -167,7 +287,8 @@ GROUP BY t.table_id, r.name;
 ```
 
 **Sample Output:**
-docs/screenshots/view_table_utilization.png
+*(see `/docs/screenshots/view_table_utilization.png`)*
+
 ---
 
 ### **View 9: view_top_customers**
@@ -187,7 +308,8 @@ ORDER BY total_reservations DESC;
 ```
 
 **Sample Output:**
-docs/screenshots/view_top_customers.png
+*(see `/docs/screenshots/view_top_customers.png`)*
+
 ---
 
 ### **View 10: view_cancelled_reservations**
@@ -207,5 +329,29 @@ WHERE rs.status = 'Cancelled';
 ```
 
 **Sample Output:**
-docs/screenshots/view_cancelled_reservations.png
+*(see `/docs/screenshots/view_cancelled_reservations.png`)*
+
 ---
+
+### 5. Contribution Matrix
+
+| Team Member   | Section(s) Contributed | Description of Work                                   |
+| ------------- | ---------------------- | ----------------------------------------------------- |
+| Mohammad Taqi | Document Lead, Views   | Authored report, integrated SQL, coordinated sections |
+| Ayaan Ahmed   | Screenshots, Testing   | Captured database outputs and visual evidence         |
+| Mohamed Ali   | Schema & Integrity     | Developed and tested constraints and relationships    |
+| Ali Hakkani   | Report Formatting, ERD | Created ER diagram and formatted report structure     |
+
+---
+
+### 6. Conclusion
+
+The Phase II implementation successfully integrates schema design, referential integrity, and analytical data views for the Restaurant Reservation System. Each module of the project aligns with database management principles, enabling efficient querying, strong data consistency, and readiness for future application development.
+
+**Next Steps:**
+
+* Implement stored procedures for automated booking conflict checks.
+* Connect to a web front-end for user-based reservation management.
+* Extend analytics to track daily performance trends and cancellation ratios.
+
+**End of Report**
