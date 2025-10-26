@@ -27,7 +27,7 @@ JOIN Table_Info t ON rsv.table_id = t.table_id;
 Provides unified reservation details for reports and dashboards.
 
 **Sample Output:**
-*(see `/docs/screenshots/view_full_reservation_info.png`)*
+*(see `/screenshots/view_full_reservation_info.png`)*
 
 ---
 
@@ -48,7 +48,7 @@ ORDER BY total_reservations DESC;
 ```
 
 **Sample Output:**
-*(see `/docs/screenshots/view_popular_restaurants.png`)*
+*(see `/screenshots/view_popular_restaurants.png`)*
 
 ---
 
@@ -70,7 +70,7 @@ WHERE t.table_id NOT IN (
 ```
 
 **Sample Output:**
-*(see `/docs/screenshots/view_available_tables.png`)*
+*(see `/screenshots/view_available_tables.png`)*
 
 ---
 
@@ -91,7 +91,7 @@ WHERE rs.reservation_date < CURDATE();
 ```
 
 **Sample Output:**
-*(see `/docs/screenshots/view_customer_history.png`)*
+*(see `/screenshots/view_customer_history.png`)*
 
 ---
 
@@ -111,7 +111,7 @@ GROUP BY c.cuisine_name;
 ```
 
 **Sample Output:**
-*(see `/docs/screenshots/view_cuisine_summary.png`)*
+*(see `/screenshots/view_cuisine_summary.png`)*
 
 ---
 
@@ -131,7 +131,7 @@ ORDER BY total_reservations DESC;
 ```
 
 **Sample Output:**
-*(see `/docs/screenshots/view_reservations_by_day.png`)*
+*(see `/screenshots/view_reservations_by_day.png`)*
 
 ---
 
@@ -153,7 +153,7 @@ WHERE rsv.reservation_date >= CURDATE() AND rsv.status = 'Booked';
 ```
 
 **Sample Output:**
-*(see `/docs/screenshots/view_active_bookings.png`)*
+*(see `/screenshots/view_active_bookings.png`)*
 
 ---
 
@@ -174,7 +174,7 @@ GROUP BY t.table_id, r.name;
 ```
 
 **Sample Output:**
-*(see `/docs/screenshots/view_table_utilization.png`)*
+*(see `/screenshots/view_table_utilization.png`)*
 
 ---
 
@@ -195,7 +195,7 @@ ORDER BY total_reservations DESC;
 ```
 
 **Sample Output:**
-*(see `/docs/screenshots/view_top_customers.png`)*
+*(see `/screenshots/view_top_customers.png`)*
 
 ---
 
@@ -216,6 +216,6 @@ WHERE rs.status = 'Cancelled';
 ```
 
 **Sample Output:**
-*(see `/docs/screenshots/view_cancelled_reservations.png`)*
+*(see `/screenshots/view_cancelled_reservations.png`)*
 
 ---
