@@ -132,14 +132,13 @@ WHERE total_reservations = (
   SELECT MAX(total_reservations) FROM view_top_customers
 );
 
-
--- View 19 Case 1
+-- View 10 Case 1
 SELECT * 
 FROM view_cancelled_reservations
 ORDER BY reservation_date DESC
 LIMIT 5;
 
--- View 19 Case 2
+-- View 10 Case 2
 SELECT * 
 FROM view_cancelled_reservations
 WHERE status <> 'Cancelled';
