@@ -339,7 +339,7 @@ WHERE rs.status = 'Cancelled';
 | ------------- | ---------------------- | ----------------------------------------------------- |
 | Mohammad Taqi | Document Lead, Views   | Authored report, integrated SQL, coordinated sections |
 | Ayaan Ahmed   | Screenshots, Testing   | Captured database outputs and visual evidence         |
-| Mohamed Ali   | Schema & Integrity     | Developed and tested constraints and relationships    |
+| Mohamed T.Omar| Schema & Integrity     | Developed and tested constraints and relationships    |
 | Ali Hakkani   | Report Formatting, ERD | Created ER diagram and formatted report structure     |
 
 ---
