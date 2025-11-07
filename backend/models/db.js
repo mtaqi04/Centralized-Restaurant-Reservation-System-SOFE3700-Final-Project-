@@ -1,19 +1,19 @@
-import mysql from "mysql2/promise";
-import dotenv from "dotenv";
-dotenv.config();
+import mysql from 'mysql2/promise';
+import { config } from '../config/config.js';
 
-export async function connectDB() {
-  try {
-    const conn = await mysql.createConnection({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME
-    });
-    global.db = conn;
-    console.log("✅ Connected to MySQL");
-  } catch (e) {
-    console.error("❌ DB connection failed:", e.message);
-    process.exit(1);
+let pool;
+
+export function getPool() {
+  if (!pool) {
+    pool = mysql.createPool(config.db);
   }
+  return pool;
+}
+
+/** Verifies DB connectivity and logs a simple SELECT 1 */
+export async function verifyConnection() {
+  const pool = getPool();
+  const [rows] = await pool.query('SELECT 1 AS ok');
+  if (!rows?.[0]?.ok) throw new Error('DB ping failed');
+  return rows[0];
 }

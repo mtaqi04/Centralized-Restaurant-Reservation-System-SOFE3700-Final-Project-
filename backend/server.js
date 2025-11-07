@@ -1,24 +1,54 @@
-// Entry point of backend server
-import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
-import { connectDB } from "./models/db.js";
-import restaurantRoutes from "./routes/restaurantRoutes.js";
-import customerRoutes from "./routes/customerRoutes.js";
-import reservationRoutes from "./routes/reservationRoutes.js";
-import weatherRoutes from "./routes/weatherRoutes.js";
-
 dotenv.config();
+
+import express from 'express';
+import { config } from './config/config.js';
+import { getPool, verifyConnection } from './models/db.js';
+
 const app = express();
-app.use(cors());
 app.use(express.json());
 
-await connectDB();
+// Simple health check
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
-app.use("/api/restaurants", restaurantRoutes);
-app.use("/api/customers", customerRoutes);
-app.use("/api/reservations", reservationRoutes);
-app.use("/api/weather", weatherRoutes);
+// DB ping endpoint for quick verification
+app.get('/db/ping', async (req, res) => {
+  try {
+    const result = await verifyConnection();
+    res.status(200).json({ status: 'connected', result });
+  } catch (err) {
+    console.error('[DB PING ERROR]', err);
+    res.status(500).json({ status: 'error', message: err.message });
+  }
+});
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+// Start server
+const server = app.listen(config.port, async () => {
+  console.log(`🚀 Server running on http://localhost:${config.port} [${config.env}]`);
+  try {
+    const pool = getPool();
+    const [db] = await pool.query('SELECT DATABASE() AS db');
+    console.log(`✅ Connected to MySQL database: ${db[0].db || config.db.database}`);
+  } catch (err) {
+    console.error('❌ Database connection failed at startup:', err.message);
+  }
+});
+
+// Graceful shutdown
+function shutdown(signal) {
+  console.log(`\n${signal} received. Closing server...`);
+  server.close(async () => {
+    try {
+      const pool = getPool();
+      await pool.end();
+      console.log('🛑 MySQL pool closed.');
+    } catch (e) {
+      console.error('Error closing MySQL pool:', e);
+    } finally {
+      process.exit(0);
+    }
+  });
+}
+['SIGINT', 'SIGTERM'].forEach(s => process.on(s, () => shutdown(s)));
