@@ -1,0 +1,39 @@
+{
+    "reservation_id": 1,
+    "reservation": {
+      "date": "2025-10-18",
+      "start_time": "12:00:00",
+      "end_time": "13:30:00",
+      "num_people": 2,
+      "status": "Booked"
+    },
+    "customer": {
+      "id": 1,
+      "name": "Jane Doe",
+      "email": "jane.doe@example.com",
+      "phone": "416-555-1001"
+    },
+    "restaurant": {
+      "id": 1,
+      "name": "Bella Italia",
+      "location": "Toronto, ON"
+    },
+    "table": {
+      "id": 2,
+      "number": 2,
+      "capacity": 4
+    },
+    "weather": {
+      "source": "openweathermap",
+      "city": "Toronto",
+      "country": "CA",
+      "temperature": 14.2,
+      "feels_like": 13.5,
+      "humidity": 72,
+      "description": "few clouds",
+      "icon": "02d",
+      "units": "metric",
+      "fetched_at": "2025-11-08T20:05:31.123Z"
+    }
+  }
+  

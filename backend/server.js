@@ -4,9 +4,12 @@ dotenv.config();
 import express from 'express';
 import { config } from './config/config.js';
 import { getPool, verifyConnection } from './models/db.js';
+import reservationRoutes from './routes/reservationRoutes.js';
 
 const app = express();
 app.use(express.json());
+
+app.use('/api/reservations', reservationRoutes);
 
 // Simple health check
 app.get('/health', (req, res) => {

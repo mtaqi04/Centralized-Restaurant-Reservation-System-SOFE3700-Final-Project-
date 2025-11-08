@@ -1,13 +1,22 @@
-import fetch from "node-fetch";
+import { getWeatherForLocation } from '../services/weatherService.js';
 
-export async function getWeatherByCity(req, res) {
+export async function getWeatherForCity(req, res) {
   try {
     const { city } = req.params;
-    const apiKey = process.env.OPENWEATHER_API_KEY;
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
-    const r = await fetch(url);
-    const data = await r.json();
-    if (r.status !== 200) return res.status(r.status).json(data);
-    res.json({ city, temp_c: data.main.temp, condition: data.weather[0].main });
-  } catch (e) { res.status(500).json({ error: e.message }); }
+    if (!city) {
+      return res.status(400).json({ error: 'City parameter is required' });
+    }
+
+    const weather = await getWeatherForLocation(city);
+    if (!weather) {
+      return res
+        .status(502)
+        .json({ error: 'Unable to fetch weather for given city' });
+    }
+
+    res.json(weather);
+  } catch (err) {
+    console.error('[WeatherController] Error:', err.message);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }
