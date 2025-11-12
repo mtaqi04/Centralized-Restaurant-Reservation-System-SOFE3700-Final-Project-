@@ -4,6 +4,7 @@ dotenv.config();
 import express from 'express';
 import { config } from './config/config.js';
 import { getPool, verifyConnection } from './models/db.js';
+import { getWeatherForLocation, insertWeatherDB } from "./services/weatherService.js";
 import reservationRoutes from './routes/reservationRoutes.js';
 
 const app = express();
@@ -24,6 +25,54 @@ app.get('/db/ping', async (req, res) => {
   } catch (err) {
     console.error('[DB PING ERROR]', err);
     res.status(500).json({ status: 'error', message: err.message });
+  }
+});
+
+app.get('/api/weather/:city', async (req, res) => {
+  try {
+    const city = req.params.city;
+    console.log("City:", req.params.city);
+    const result = await getWeatherForLocation(city);
+    return res.json(result);
+  } catch (err) {
+    console.error("Couldn't find weather");
+    res.status(500).json({status: "error", message: err.message});
+  }
+});
+
+
+app.get('/api/all-restaurant-weather', async (req, res) => {
+  try {
+    const pool = getPool();
+    const [rows] = await pool.query(
+      `SELECT DISTINCT location AS city
+        FROM Restaurant
+        WHERE location IS NOT NULL AND location <> '';
+      `
+    );
+
+    const cities = rows.map(r => r.city);
+
+    const results = [];
+    for (const city of cities) {
+      try {
+        const weather = await getWeatherForLocation(city);
+        await insertWeatherDB(weather);
+        results.push({ ok: true, city, data: weather });
+      } catch (e) {
+        results.push({ ok: false, city, error: e.message });
+      }
+    }
+
+    return res.json({
+      count: cities.length,
+      ok: results.filter(r => r.ok).length,
+      fail: results.filter(r => !r.ok).length,
+      results
+    });
+  } catch (err) {
+    console.error("Couldn't find weather");
+    res.status(500).json({status: "error", message: err.message});
   }
 });
 

@@ -80,3 +80,24 @@ FROM Reservation rs
 JOIN Customer c ON rs.customer_id = c.customer_id
 JOIN Restaurant r ON rs.restaurant_id = r.restaurant_id
 WHERE rs.status = 'Cancelled';
+
+
+-- View 11: Weather by Restaurant
+CREATE OR REPLACE VIEW v_restaurant_weather AS
+SELECT
+  r.restaurant_id,
+  r.name AS restaurant_name,
+  r.location AS city,
+  w.temperature,
+  w.feels_like,
+  w.humidity,
+  w.wind_speed,
+  w.cloud_coverage,
+  w.description,
+  w.icon,
+  w.units,
+  w.source,
+  w.fetched_at
+FROM Restaurant r
+LEFT JOIN Weather_Cache_City w
+  ON w.city = r.location;

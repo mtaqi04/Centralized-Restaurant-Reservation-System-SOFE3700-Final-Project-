@@ -1,0 +1,26 @@
+[
+    {
+        "source": "openweathermap",
+        "city": "Toronto",
+        "country": "CA",
+        "temperature": -4.12,
+        "feels_like": -10.77,
+        "humidity": 85,
+        "description": "light snow",
+        "icon": "13n",
+        "units": "metric",
+        "fetched_at": "2025-11-11T06:18:37.067Z"
+    },
+    {
+        "source": "openweathermap",
+        "city": "London",
+        "country": "GB",
+        "temperature": 10,
+        "feels_like": 9.14,
+        "humidity": 94,
+        "description": "overcast clouds",
+        "icon": "04n",
+        "units": "metric",
+        "fetched_at": "2025-11-11T06:21:38.944Z"
+    }
+]
