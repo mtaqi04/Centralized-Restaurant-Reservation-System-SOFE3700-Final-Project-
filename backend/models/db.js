@@ -5,7 +5,10 @@ let pool;
 
 export function getPool() {
   if (!pool) {
-    pool = mysql.createPool(config.db);
+    pool = mysql.createPool({
+      ...config.db,
+      multipleStatements: true,
+    });
   }
   return pool;
 }
