@@ -6,11 +6,23 @@ import { config } from './config/config.js';
 import { getPool, verifyConnection } from './models/db.js';
 import { getWeatherForLocation, insertWeatherDB } from "./services/weatherService.js";
 import reservationRoutes from './routes/reservationRoutes.js';
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
+// Serve the frontend folder as static files
+app.use(express.static(path.join(__dirname, "..", "frontend")));
 
 app.use('/api/reservations', reservationRoutes);
+
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
+});
+
 
 // Simple health check
 app.get('/health', (req, res) => {
