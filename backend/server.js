@@ -6,11 +6,15 @@ import { config } from './config/config.js';
 import { getPool, verifyConnection } from './models/db.js';
 import { getWeatherForLocation, insertWeatherDB } from "./services/weatherService.js";
 import reservationRoutes from './routes/reservationRoutes.js';
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 app.use(express.json());
 
 app.use('/api/reservations', reservationRoutes);
+
+// Register your auth routes
+app.use("/api/auth", authRoutes);
 
 // Simple health check
 app.get('/health', (req, res) => {
