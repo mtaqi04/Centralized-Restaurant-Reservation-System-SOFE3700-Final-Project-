@@ -1,7 +1,4 @@
-
-// app-frontend.js (loaded with type="text/babel" in index.html)
-
-// Simple React component for your page
+// app-frontend.js (React)
 function App() {
   return (
     <div>
@@ -15,6 +12,5 @@ function App() {
   );
 }
 
-// Mount React into the #root div
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);

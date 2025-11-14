@@ -13,11 +13,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 app.use(express.json());
-
+app.use(express.static(path.join(__dirname, "..", "frontend")));
 app.use('/api/reservations', reservationRoutes);
 
 // Register your auth routes
 app.use("/api/auth", authRoutes);
+
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
+});
 
 // Simple health check
 app.get('/health', (req, res) => {
