@@ -2,6 +2,23 @@
 import { getPool } from '../models/db.js';
 import { getWeatherForLocation } from '../services/weatherService.js';
 
+
+export async function getAllReservations(req, res) {
+  try {
+    const pool = getPool();
+
+    const [rows] = await pool.query(
+      `
+      SELECT * FROM views_all_reservations;
+      `
+    )
+    return res.json(rows);
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
 export async function getReservation(req, res) {
   const { id } = req.params;
 

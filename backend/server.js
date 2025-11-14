@@ -9,6 +9,7 @@ import reservationRoutes from './routes/reservationRoutes.js';
 import authRoutes from "./routes/authRoutes.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getAllReservations } from "./controllers/reservationController.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -51,6 +52,8 @@ app.get('/api/weather/:city', async (req, res) => {
     res.status(500).json({status: "error", message: err.message});
   }
 });
+
+app.use("/reservations", reservationRoutes);
 
 
 app.get('/api/all-restaurant-weather', async (req, res) => {
