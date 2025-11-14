@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "node --watch backend/server.js",
     "start": "node backend/server.js",
-    "run": "node frontend/app.js",
     "db:seed": "echo 'Run schema + sample_data manually via MySQL Workbench for now'"
   },
   "dependencies": {
@@ -15,8 +14,6 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.7",
-    "node-fetch": "^3.3.2",
-    "react": "^19.2.0"
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {

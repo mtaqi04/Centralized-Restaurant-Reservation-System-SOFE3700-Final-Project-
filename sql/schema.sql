@@ -15,16 +15,6 @@ CREATE TABLE IF NOT EXISTS Customer (
   phone VARCHAR(15)
 );
 
--- Table_Info must exist before Reservation because Reservation has a FK to it
-CREATE TABLE IF NOT EXISTS Table_Info (
-  table_id INT AUTO_INCREMENT PRIMARY KEY,
-  restaurant_id INT NOT NULL,
-  capacity INT NOT NULL,
-  table_number INT NOT NULL,
-  UNIQUE KEY uk_restaurant_table (restaurant_id, table_number),
-  FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
-);
-
 CREATE TABLE IF NOT EXISTS Reservation (
   reservation_id INT AUTO_INCREMENT PRIMARY KEY,
   customer_id INT,
@@ -32,12 +22,21 @@ CREATE TABLE IF NOT EXISTS Reservation (
   reservation_date DATE,
   start_time TIME,
   end_time TIME,
-  table_id INT NULL,
-  num_people INT NULL,
-  status ENUM('Booked','Cancelled','Completed') DEFAULT 'Booked',
   FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
   FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
+  table_id INT NULL,
+  num_people INT NULL,
+  status ENUM('Booked','Cancelled','Completed') DEFAULT 'Booked', 
   CONSTRAINT fk_res_table FOREIGN KEY (table_id) REFERENCES Table_Info(table_id)
+);
+
+CREATE TABLE IF NOT EXISTS Table_Info (
+  table_id INT AUTO_INCREMENT PRIMARY KEY,
+  restaurant_id INT NOT NULL,
+  capacity INT NOT NULL,
+  table_number INT NOT NULL,
+  UNIQUE KEY uk_restaurant_table (restaurant_id, table_number),
+  FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
 );
 
 CREATE TABLE IF NOT EXISTS Cuisine (

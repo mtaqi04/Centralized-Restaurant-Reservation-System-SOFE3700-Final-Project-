@@ -6,19 +6,15 @@ import { config } from './config/config.js';
 import { getPool, verifyConnection } from './models/db.js';
 import { getWeatherForLocation, insertWeatherDB } from "./services/weatherService.js";
 import reservationRoutes from './routes/reservationRoutes.js';
-import path from "path";
-import { fileURLToPath } from "url";
-import fs from "fs";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 app.use(express.json());
-// Serve the frontend folder as static files
-app.use(express.static(path.join(__dirname, "..", "frontend")));
 
 app.use('/api/reservations', reservationRoutes);
+
+// Register your auth routes
+app.use("/api/auth", authRoutes);
 
 // Simple health check
 app.get('/health', (req, res) => {
@@ -85,34 +81,14 @@ app.get('/api/all-restaurant-weather', async (req, res) => {
 });
 
 // Start server
-// const server = app.listen(config.port, async () => {
-//   console.log(`🚀 Server running on http://localhost:${config.port} [${config.env}]`);
-//   try {
-//     const pool = getPool();
-//     const [db] = await pool.query('SELECT DATABASE() AS db');
-//     console.log(`✅ Connected to MySQL database: ${db[0].db || config.db.database}`);
-//   } catch (err) {
-//     console.error('❌ Database connection failed at startup:', err.message);
-//   }
-// });
-
 const server = app.listen(config.port, async () => {
   console.log(`🚀 Server running on http://localhost:${config.port} [${config.env}]`);
   try {
     const pool = getPool();
-
-    // 1) Ensure we’re connected
     const [db] = await pool.query('SELECT DATABASE() AS db');
     console.log(`✅ Connected to MySQL database: ${db[0].db || config.db.database}`);
-
-    // 2) Load and execute schema.sql
-    const schemaPath = path.join(process.cwd(), 'sql/schema.sql'); // from project root
-    const schemaSql = fs.readFileSync(schemaPath, 'utf8');
-
-    await pool.query(schemaSql);
-    console.log('✅ Schema successfully loaded into MySQL (Railway).');
   } catch (err) {
-    console.error('❌ Database connection failed at startup or schema load:', err.message);
+    console.error('❌ Database connection failed at startup:', err.message);
   }
 });
 
