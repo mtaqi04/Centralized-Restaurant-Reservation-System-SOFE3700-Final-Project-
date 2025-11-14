@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-
+import cors from 'cors';
 import express from 'express';
 import { config } from './config/config.js';
 import { getPool, verifyConnection } from './models/db.js';
@@ -16,6 +16,9 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "frontend")));
 app.use('/api/reservations', reservationRoutes);
+app.use(cors({
+  origin: "http://localhost:5173",  // allow your Vite dev server
+}));
 
 // Register your auth routes
 app.use("/api/auth", authRoutes);

@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch backend/server.js",
-    "start": "node backend/server.js",
+    "start": "concurrently \"npm run start:backend\" \"npm run dev --prefix frontend-vite\"",
+    "start:backend": "node backend/server.js",    
     "db:seed": "echo 'Run schema + sample_data manually via MySQL Workbench for now'"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "nodemon": "^3.1.11"
   }
 }
