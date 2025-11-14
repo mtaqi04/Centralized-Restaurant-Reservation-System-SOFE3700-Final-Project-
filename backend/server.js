@@ -6,6 +6,7 @@ import { config } from './config/config.js';
 import { getPool, verifyConnection } from './models/db.js';
 import { getWeatherForLocation, insertWeatherDB } from "./services/weatherService.js";
 import reservationRoutes from './routes/reservationRoutes.js';
+
 import authRoutes from "./routes/authRoutes.js";
 
 import path from "path";
