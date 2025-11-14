@@ -8,6 +8,7 @@ import { getWeatherForLocation, insertWeatherDB } from "./services/weatherServic
 import reservationRoutes from './routes/reservationRoutes.js';
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
