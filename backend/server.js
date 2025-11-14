@@ -6,10 +6,7 @@ import { config } from './config/config.js';
 import { getPool, verifyConnection } from './models/db.js';
 import { getWeatherForLocation, insertWeatherDB } from "./services/weatherService.js";
 import reservationRoutes from './routes/reservationRoutes.js';
-
-
 import authRoutes from "./routes/authRoutes.js";
-
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -114,3 +111,4 @@ function shutdown(signal) {
   });
 }
 ['SIGINT', 'SIGTERM'].forEach(s => process.on(s, () => shutdown(s)));
+// Testing changing msall things
