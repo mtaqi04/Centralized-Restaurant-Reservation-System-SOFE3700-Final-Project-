@@ -52,3 +52,19 @@ CREATE TABLE IF NOT EXISTS Restaurant_Cuisine (
   FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
   FOREIGN KEY (cuisine_id) REFERENCES Cuisine(cuisine_id)
 );
+
+CREATE TABLE IF NOT EXISTS Weather_Cache_City (
+  city                   VARCHAR(150) PRIMARY KEY,              -- e.g., matches Restaurant.location
+  temperature            DECIMAL(4,1)      NOT NULL,
+  feels_like             DECIMAL(4,1)      NULL,
+  humidity               TINYINT UNSIGNED  NULL,                -- %
+  wind_speed             DECIMAL(4,1)      NULL,                -- m/s (OWM default with metric)
+  cloud_coverage         TINYINT UNSIGNED  NULL,                -- %
+  description            VARCHAR(80)       NULL,                -- e.g., "broken clouds"
+  icon                   VARCHAR(8)        NULL,                -- e.g., "04d"
+  units                  ENUM('metric','imperial','standard') NOT NULL DEFAULT 'metric',
+  source                 ENUM('owm')       NOT NULL DEFAULT 'owm',
+  fetched_at             DATETIME          NOT NULL,            -- when you fetched it
+  raw_response           JSON              NULL,                -- optional full OWM payload
+  KEY idx_fetched_at (fetched_at)
+);

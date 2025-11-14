@@ -1,5 +1,6 @@
 // backend/services/weatherService.js
 import 'dotenv/config';
+import { getPool } from '../models/db.js';
 
 const BASE_URL =
   process.env.OPENWEATHER_BASE_URL ||
@@ -27,8 +28,10 @@ export async function getWeatherForLocation(location) {
     console.warn('[Weather] Missing OPENWEATHER_API_KEY. Skipping weather fetch.');
     return null;
   }
-
+  
   const city = extractCity(location);
+  console.log("Fetching weather for:", city);
+
   if (!city) {
     console.warn('[Weather] Could not extract city from location:', location);
     return null;
@@ -70,4 +73,43 @@ export async function getWeatherForLocation(location) {
   } finally {
     clearTimeout(timeout);
   }
+}
+
+
+export async function insertWeatherDB(weather) {
+  const pool = getPool();
+
+  const sql = `
+    INSERT INTO Weather_Cache_City (
+      city, temperature, feels_like, humidity, wind_speed,
+      cloud_coverage, description, icon, units, source, fetched_at, raw_response
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'owm', NOW(), ?)
+    ON DUPLICATE KEY UPDATE
+      temperature = VALUES(temperature),
+      feels_like = VALUES(feels_like),
+      humidity = VALUES(humidity),
+      wind_speed = VALUES(wind_speed),
+      cloud_coverage = VALUES(cloud_coverage),
+      description = VALUES(description),
+      icon = VALUES(icon),
+      units = VALUES(units),
+      source = VALUES(source),
+      fetched_at = VALUES(fetched_at),
+      raw_response = VALUES(raw_response);
+  `;
+
+  const params = [
+    weather.city,
+    weather.temperature,
+    weather.feels_like,
+    weather.humidity,
+    weather.wind_speed,
+    weather.cloud_coverage,
+    weather.description,
+    weather.icon,
+    weather.units || "metric",
+    JSON.stringify(weather.raw_response)
+  ];
+
+  await pool.query(sql, params);
 }
