@@ -7,10 +7,23 @@
         "dev": "node --watch server.js",
         "start": "node server.js",
         "health": "node -e \"fetch('http://localhost:'+(process.env.PORT||3000)+'/health').then(r=>r.text()).then(console.log).catch(console.error)\""
+        "dev": "node --watch server.js",
+        "start": "node server.js",
+        "health": "node -e \"fetch('http://localhost:'+(process.env.PORT||3000)+'/health').then(r=>r.text()).then(console.log).catch(console.error)\""
     },
     "dependencies": {
         "dotenv": "^16.6.1",
         "express": "^4.19.2",
         "mysql2": "^3.11.3"
+        "bcrypt": "^6.0.0",
+        "bcryptjs": "^3.0.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.6.1",
+        "express": "^4.21.2",
+        "jsonwebtoken": "^9.0.2",
+        "mysql2": "^3.15.3",
+        "node-fetch": "^3.3.2"
     }
+}
+
 }

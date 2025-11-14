@@ -11,18 +11,14 @@ import { fileURLToPath } from "url";
 import fs from "fs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+import authRoutes from "./routes/authRoutes.js";
+
 const app = express();
 app.use(express.json());
 // Serve the frontend folder as static files
 app.use(express.static(path.join(__dirname, "..", "frontend")));
 
 app.use('/api/reservations', reservationRoutes);
-
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
-});
-
 
 // Simple health check
 app.get('/health', (req, res) => {
