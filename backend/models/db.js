@@ -20,6 +20,10 @@ export function getPool() {
     } catch (err) {
       console.error("❌ Pool creation error:", err);
     }
+    pool = mysql.createPool({
+      ...config.db,
+      multipleStatements: true,
+    });
   }
   return pool;
 }
