@@ -7,6 +7,8 @@ import { getPool, verifyConnection } from './models/db.js';
 import reservationRoutes from './routes/reservationRoutes.js';
 import authRoutes from "./routes/authRoutes.js";
 
+
+
 const app = express();
 app.use(express.json());
 
@@ -59,3 +61,4 @@ function shutdown(signal) {
   });
 }
 ['SIGINT', 'SIGTERM'].forEach(s => process.on(s, () => shutdown(s)));
+// Testing changing msall things
