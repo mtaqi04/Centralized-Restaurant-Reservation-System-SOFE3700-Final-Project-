@@ -1,7 +1,7 @@
 import React from "react";
 const { useState, useEffect } = React;
 
-function Dashboard() {
+function AllReservations() {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -64,4 +64,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default AllReservations;

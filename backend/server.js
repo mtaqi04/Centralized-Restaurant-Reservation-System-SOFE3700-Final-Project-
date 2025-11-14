@@ -7,6 +7,7 @@ import { getPool, verifyConnection } from './models/db.js';
 import { getWeatherForLocation, insertWeatherDB } from "./services/weatherService.js";
 import reservationRoutes from './routes/reservationRoutes.js';
 import authRoutes from "./routes/authRoutes.js";
+import customerRoutes from "./routes/customerRoutes.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { getAllReservations } from "./controllers/reservationController.js";
@@ -57,7 +58,7 @@ app.get('/api/weather/:city', async (req, res) => {
 });
 
 app.use("/reservations", reservationRoutes);
-
+app.use("/customers", customerRoutes);
 
 app.get('/api/all-restaurant-weather', async (req, res) => {
   try {

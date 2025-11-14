@@ -1,7 +1,11 @@
+import { getPool } from '../models/db.js';
+
 export async function createCustomer(req, res) {
+  const pool = getPool();
+
   try {
     const { full_name, email, phone } = req.body;
-    const [result] = await global.db.execute(
+    const [result] = await pool.query(
       "INSERT INTO Customer (full_name, email, phone) VALUES (?, ?, ?)",
       [full_name, email, phone]
     );
@@ -10,17 +14,21 @@ export async function createCustomer(req, res) {
 }
 
 export async function listCustomers(_req, res) {
+  const pool = getPool();
+
   try {
-    const [rows] = await global.db.execute("SELECT * FROM Customer");
+    const [rows] = await pool.query("SELECT * FROM Customer");
     res.json(rows);
   } catch (e) { res.status(500).json({ error: e.message }); }
 }
 
 export async function updateCustomer(req, res) {
+  const pool = getPool();
+
   try {
     const { id } = req.params;
     const { full_name, email, phone } = req.body;
-    await global.db.execute(
+    await pool.query(
       "UPDATE Customer SET full_name=?, email=?, phone=? WHERE customer_id=?",
       [full_name, email, phone, id]
     );
@@ -29,9 +37,12 @@ export async function updateCustomer(req, res) {
 }
 
 export async function deleteCustomer(req, res) {
+
+  const pool = getPool();
+
   try {
     const { id } = req.params;
-    await global.db.execute("DELETE FROM Customer WHERE customer_id=?", [id]);
+    await pool.query("DELETE FROM Customer WHERE customer_id=?", [id]);
     res.json({ deleted: true });
   } catch (e) { res.status(500).json({ error: e.message }); }
 }
