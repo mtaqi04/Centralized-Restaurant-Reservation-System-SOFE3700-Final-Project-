@@ -1,0 +1,105 @@
+/* frontend/src/styles.css */
+
+:root {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #1f2933;
+    background-color: #f5f7fa;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  .app-root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .app-header {
+    background: #111827;
+    color: #ffffff;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .app-header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+  
+  .app-header nav a {
+    color: #e5e7eb;
+    text-decoration: none;
+    margin-left: 16px;
+    font-size: 0.95rem;
+  }
+  
+  .app-header nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .app-main {
+    flex: 1;
+    padding: 24px 32px;
+  }
+  
+  .card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.08);
+    max-width: 640px;
+    margin-top: 16px;
+  }
+  
+  button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    background: #2563eb;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  
+  button:disabled {
+    opacity: 0.7;
+    cursor: default;
+  }
+  
+  button:hover:not(:disabled) {
+    background: #1d4ed8;
+  }
+  
+  .api-response,
+  .api-error {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  
+  .api-response {
+    background: #f3f4ff;
+    border: 1px solid #c7d2fe;
+  }
+  
+  .api-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+  }
+  
+  .app-footer {
+    text-align: center;
+    padding: 12px 0;
+    background: #111827;
+    color: #e5e7eb;
+    font-size: 0.85rem;
+  }
+  
