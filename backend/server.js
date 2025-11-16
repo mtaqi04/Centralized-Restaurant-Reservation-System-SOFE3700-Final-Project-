@@ -11,6 +11,9 @@ import customerRoutes from "./routes/customerRoutes.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { getAllReservations } from "./controllers/reservationController.js";
+import viewsRoutes from "./viewsBackend/viewsRoutes.js";
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -23,6 +26,25 @@ app.use(cors({
 
 // Register your auth routes
 app.use("/api/auth", authRoutes);
+
+
+
+//Common Views
+app.use('/common-views', viewsRoutes);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 app.get("/", (req, res) => {
