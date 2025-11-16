@@ -15,7 +15,7 @@ function App() {
 
     try {
       // adjust endpoint to match your backend health route
-      const data = await apiClient("/api/health");
+      const data = await apiClient("/health");
       setApiResult(data);
     } catch (err) {
       setError(err.message || "Failed to reach API");

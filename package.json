@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch backend/server.js",
-    "start": "concurrently \"npm run start:backend\" \"npm run dev --prefix frontend-vite\"",
+    "start": "concurrently \"npm run start:backend\" \"npm run dev --prefix frontend\"",
     "start:backend": "node backend/server.js",
     "db:seed": "echo 'Run schema + sample_data manually via MySQL Workbench for now'"
   },

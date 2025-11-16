@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
 // Simple health check
 app.get('/health', (req, res) => {
   res.status(200).send('OK');
+  console.log("ran api");
 });
 
 // DB ping endpoint for quick verification
