@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard – Restaurant Reservation System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-title">Restaurant Reservation System</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="search.html">Search</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero">
+      <h1>Analytics Dashboard</h1>
+      <p>
+        These charts use live API data to visualize reservation activity across restaurants
+        and days of the week.
+      </p>
+    </section>
+
+    <section class="dashboard-grid">
+      <!-- Chart 1: Reservations by restaurant -->
+      <article class="chart-card">
+        <div class="chart-card-header">
+          <h2>Reservations by Restaurant</h2>
+          <p id="restaurantChartStatus" class="chart-status">Loading data…</p>
+        </div>
+        <div class="chart-container">
+          <canvas id="reservationsByRestaurantChart" aria-label="Reservations by restaurant"></canvas>
+        </div>
+      </article>
+
+      <!-- Chart 2: Reservations by day-of-week -->
+      <article class="chart-card">
+        <div class="chart-card-header">
+          <h2>Reservations by Day of Week</h2>
+          <p id="dayChartStatus" class="chart-status">Loading data…</p>
+        </div>
+        <div class="chart-container">
+          <canvas id="reservationsByDayChart" aria-label="Reservations by day of week"></canvas>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Centralized Restaurant Reservation System</p>
+  </footer>
+
+  <!-- Frontend API base URL (can be replaced by build tooling later) -->
+  <script>
+    window.FRONTEND_API_BASE_URL =
+      window.FRONTEND_API_BASE_URL || 'http://localhost:3000';
+  </script>
+
+  <!-- Chart logic -->
+  <script src="charts.js"></script>
+</body>
+</html>

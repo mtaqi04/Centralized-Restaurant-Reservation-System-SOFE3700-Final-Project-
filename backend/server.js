@@ -10,6 +10,7 @@ import authRoutes from "./routes/authRoutes.js";
 import customerRoutes from "./routes/customerRoutes.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import metricsRoutes from "./routes/metricsRoutes.js";
 import { getAllReservations } from "./controllers/reservationController.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +24,8 @@ app.use(cors({
 
 // Register your auth routes
 app.use("/api/auth", authRoutes);
+
+app.use("/api/metrics", metricsRoutes);
 
 
 app.get("/", (req, res) => {
