@@ -15,6 +15,7 @@ function Home() {
             <NavButton to="/max-reservations">Max Reservations</NavButton>
             <NavButton to="/book-reservation">Book a Table</NavButton>
             <NavButton to="/new-customer">Create New User</NavButton>
+            <NavButton to="/new-restaurant">Register New Restaurant</NavButton>
         </>
     );
 }

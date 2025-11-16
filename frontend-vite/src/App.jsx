@@ -6,7 +6,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './Home';
 import {AllReservations, OverAverage, MaxReservations} from './CommonViews';
-import {NewReservationForm, NewCustomerForm} from './Post';
+import {NewReservationForm, NewCustomerForm, NewRestaurantForm} from './Post';
 import ViewCustomers from './Customer';
 
 
@@ -20,6 +20,7 @@ function App() {
         <Route path="/max-reservations" element={<MaxReservations />} />
         <Route path="/book-reservation" element={<NewReservationForm />} />
         <Route path="/new-customer" element={<NewCustomerForm />} />
+        <Route path="/new-restaurant" element={<NewRestaurantForm />} />
       </Routes>
     </BrowserRouter>
   )

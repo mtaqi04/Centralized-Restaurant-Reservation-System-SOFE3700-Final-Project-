@@ -153,3 +153,53 @@ export async function p_createCustomer(req, res) {
         });
     }
 }
+
+export async function p_createRestaurant(req, res) {
+  try {
+    const pool = getPool();
+
+    const {
+      name,
+      location,
+      email,
+      opening_time,
+      closing_time
+    } = req.body;
+
+    // Check required fields
+    if (!name || !location || !email || !opening_time || !closing_time) {
+      return res.status(400).json({
+        status: "error",
+        message: "Missing required fields",
+      });
+    }
+
+    // Insert new restaurant
+    const [result] = await pool.query(
+      `
+      INSERT INTO Restaurant 
+        (name, location, email, opening_time, closing_time)
+      VALUES (?, ?, ?, ?, ?)
+      `,
+      [
+        name,
+        location,
+        email,
+        opening_time,
+        closing_time
+      ]
+    );
+
+    return res.status(201).json({
+      status: "success",
+      restaurant_id: result.insertId
+    });
+
+  } catch (err) {
+    console.error("Error creating restaurant:", err);
+    return res.status(500).json({
+      status: "error",
+      message: "Failed to create restaurant"
+    });
+  }
+}
