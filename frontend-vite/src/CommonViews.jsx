@@ -132,3 +132,60 @@ export function OverAverage() {
     </div>
   );
 }
+
+export function MaxReservations() {
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    // call your Node backend
+    fetch("http://localhost:3000/views/max-reservations")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch reservations");
+        return res.json();
+      })
+      .then((data) => {
+        setRows(data);
+        setLoading(false);
+        //console.log(data);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Could not load reservations");
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p>Loading reservations...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
+
+  return (
+    <div>
+      <h2>Reservations Dashboard</h2>
+      {rows.length === 0 ? (
+        <p>No reservations found.</p>
+      ) : (
+        <table border="1" cellPadding="4">
+          <thead>
+            <tr>
+              <th>Restaurant ID</th>
+              <th>Restaurant Name</th>
+              <th>Total Reservations</th>
+              {/* add more cols as needed */}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, index) => (
+              <tr key={r.index}>
+                <td>{r.restaurant_id}</td>
+                <td>{r.restaurant_name}</td>
+                <td>{r.total_reservations}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}

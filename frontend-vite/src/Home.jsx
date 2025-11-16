@@ -12,7 +12,9 @@ function Home() {
             <NavButton to="/all-reservations">View All Reservations</NavButton>
             <NavButton to="/customers">View All Customers</NavButton>
             <NavButton to="/over-average">Over Average</NavButton>
-
+            <NavButton to="/max-reservations">Max Reservations</NavButton>
+            <NavButton to="/book-reservation">Book a Table</NavButton>
+            <NavButton to="/new-customer">Create New User</NavButton>
         </>
     );
 }

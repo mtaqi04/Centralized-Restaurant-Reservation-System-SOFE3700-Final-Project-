@@ -8,6 +8,7 @@ import { getWeatherForLocation, insertWeatherDB } from "./WeatherAPI/weatherServ
 import reservationRoutes from './routes/reservationRoutes.js';
 import authRoutes from "./routes/authRoutes.js";
 import customerRoutes from "./routes/customerRoutes.js";
+import postCommandRoutes from "./viewsBackend/postCommandsRoutes.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { getAllReservations } from "./controllers/reservationController.js";
@@ -31,6 +32,9 @@ app.use("/api/auth", authRoutes);
 
 //Common Views
 app.use('/views', viewsRoutes);
+
+//Post Commands
+app.use('/post', postCommandRoutes);
 
 
 

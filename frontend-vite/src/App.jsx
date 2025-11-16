@@ -5,8 +5,10 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './Home';
-import {AllReservations, OverAverage} from './CommonViews';
-import ViewCustomers from './Customer'
+import {AllReservations, OverAverage, MaxReservations} from './CommonViews';
+import {NewReservationForm, NewCustomerForm} from './Post';
+import ViewCustomers from './Customer';
+
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/all-reservations" element={<AllReservations />} />
         <Route path="/over-average" element={<OverAverage />} />
-        <Route path="/customers" element={<ViewCustomers />} />
+        <Route path="/max-reservations" element={<MaxReservations />} />
+        <Route path="/book-reservation" element={<NewReservationForm />} />
+        <Route path="/new-customer" element={<NewCustomerForm />} />
       </Routes>
     </BrowserRouter>
   )
