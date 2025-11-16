@@ -89,3 +89,95 @@ export async function viewAllEmails(req, res) {
         console.log(err);
     }
 };
+
+
+//Custom Views
+
+//Custom View 1
+export async function averageReservation(req, res) {
+    try {
+        const pool = getPool();
+
+        const [rows] = await pool.query(
+            `
+            SELECT * FROM view_avg_party_size;
+            `
+        );
+        return res.json(rows);
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
+
+//Custom View 2
+export async function reservationsByDay(req, res) {
+    try {
+        const pool = getPool();
+
+        const [rows] = await pool.query(
+            `
+            SELECT * FROM view_reservations_per_day;
+            `
+        );
+        return res.json(rows);
+    }
+    catch (err) {
+        console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
+    }
+};
+
+//Custom View 3
+export async function frequentCustomers(req, res) {
+    try {
+        const pool = getPool();
+
+        const [rows] = await pool.query(
+            `
+            SELECT * FROM view_frequent_customers;
+            `
+        );
+        return res.json(rows);
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
+
+//Custom View 4
+export async function availableTables(req, res) {
+    try {
+        const pool = getPool();
+
+        const [rows] = await pool.query(
+            `
+            SELECT * FROM view_available_tables_summary;
+            `
+        );
+        return res.json(rows);
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
+
+//Custom View 5
+export async function openLate(req, res) {
+    try {
+        const pool = getPool();
+
+        const [rows] = await pool.query(
+            `
+            SELECT * FROM view_late_restaurants;
+            `
+        );
+        return res.json(rows);
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
