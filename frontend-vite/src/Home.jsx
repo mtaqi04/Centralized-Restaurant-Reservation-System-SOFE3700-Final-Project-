@@ -11,7 +11,8 @@ function Home() {
             <h1>Home Page</h1>
             <NavButton to="/all-reservations">View All Reservations</NavButton>
             <NavButton to="/customers">View All Customers</NavButton>
-        
+            <NavButton to="/over-average">Over Average</NavButton>
+
         </>
     );
 }

@@ -1,6 +1,6 @@
 // backend/controllers/reservationController.js
 import { getPool } from '../models/db.js';
-import { getWeatherForLocation } from '../services/weatherService.js';
+import { getWeatherForLocation } from '../WeatherAPI/weatherService.js';
 
 
 export async function getAllReservations(req, res) {

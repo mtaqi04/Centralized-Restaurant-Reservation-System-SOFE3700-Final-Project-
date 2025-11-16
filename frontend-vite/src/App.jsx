@@ -5,7 +5,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './Home';
-import AllReservations from './AllReservations';
+import {AllReservations, OverAverage} from './CommonViews';
 import ViewCustomers from './Customer'
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/all-reservations" element={<AllReservations />} />
+        <Route path="/over-average" element={<OverAverage />} />
         <Route path="/customers" element={<ViewCustomers />} />
       </Routes>
     </BrowserRouter>

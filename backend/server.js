@@ -4,7 +4,7 @@ import cors from 'cors';
 import express from 'express';
 import { config } from './config/config.js';
 import { getPool, verifyConnection } from './models/db.js';
-import { getWeatherForLocation, insertWeatherDB } from "./services/weatherService.js";
+import { getWeatherForLocation, insertWeatherDB } from "./WeatherAPI/weatherService.js";
 import reservationRoutes from './routes/reservationRoutes.js';
 import authRoutes from "./routes/authRoutes.js";
 import customerRoutes from "./routes/customerRoutes.js";
@@ -30,7 +30,7 @@ app.use("/api/auth", authRoutes);
 
 
 //Common Views
-app.use('/common-views', viewsRoutes);
+app.use('/views', viewsRoutes);
 
 
 

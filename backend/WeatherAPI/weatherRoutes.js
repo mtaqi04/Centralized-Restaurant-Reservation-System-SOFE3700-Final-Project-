@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as ctrl from "../controllers/weatherController.js";
+import * as ctrl from "./weatherController.js";
 const r = Router();
 
 r.get("/:city", ctrl.getWeatherByCity);
