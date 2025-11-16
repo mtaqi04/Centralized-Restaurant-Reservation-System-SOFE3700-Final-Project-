@@ -1,4 +1,4 @@
-import { getWeatherForLocation } from '../services/weatherService.js';
+import { getWeatherForLocation } from './weatherService.js';
 
 export async function getWeatherForCity(req, res) {
   try {

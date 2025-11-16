@@ -1,5 +1,5 @@
 import { getPool } from '../models/db.js';
-import { getWeatherForLocation } from '../services/weatherService.js';
+import { getWeatherForLocation } from '../WeatherAPI/weatherService.js';
 
 //Common View 1
 export async function views_all_reservations(req, res) {
@@ -14,8 +14,12 @@ export async function views_all_reservations(req, res) {
     return res.json(rows);
   }
   catch (err) {
-    console.log(err);
-  }
+        console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
+    }
 };
 
 //Common view 2
@@ -33,6 +37,10 @@ export async function getMaxReservations(req, res) {
     } 
     catch (err) {
         console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
     }
 };
 
@@ -51,6 +59,10 @@ export async function getGreaterThanAverageReservations(req, res) {
     } 
     catch (err) {
         console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
     }
 };
 
@@ -69,6 +81,10 @@ export async function numOfReservationsByRestaurant(req, res) {
     } 
     catch (err) {
         console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
     }
 };
 
@@ -87,6 +103,10 @@ export async function viewAllEmails(req, res) {
     } 
     catch (err) {
         console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
     }
 };
 
@@ -107,6 +127,10 @@ export async function averageReservation(req, res) {
     }
     catch (err) {
         console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
     }
 };
 
@@ -145,6 +169,10 @@ export async function frequentCustomers(req, res) {
     }
     catch (err) {
         console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
     }
 };
 
@@ -162,6 +190,10 @@ export async function availableTables(req, res) {
     }
     catch (err) {
         console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
     }
 };
 
@@ -179,5 +211,9 @@ export async function openLate(req, res) {
     }
     catch (err) {
         console.log(err);
+            return res.status(500).json({
+            status: "error",
+            message: err.message,
+        });
     }
 };
