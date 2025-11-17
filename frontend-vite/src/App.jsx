@@ -21,6 +21,7 @@ function App() {
         <Route path="/book-reservation" element={<NewReservationForm />} />
         <Route path="/new-customer" element={<NewCustomerForm />} />
         <Route path="/new-restaurant" element={<NewRestaurantForm />} />
+        <Route path="/customers" element={<ViewCustomers />} />
       </Routes>
     </BrowserRouter>
   )
