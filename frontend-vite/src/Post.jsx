@@ -112,6 +112,7 @@ export function NewCustomerForm() {
     full_name: "",
     email: "",
     phone: "",
+    password:"",
   });
 
   function handleChange(e) {
@@ -136,7 +137,6 @@ export function NewCustomerForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-
       <input
         type="text"
         name="full_name"
@@ -164,6 +164,15 @@ export function NewCustomerForm() {
         required
         min="0"
         max="999999999"
+      />
+
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={form.password}
+        onChange={handleChange}
+        required
       />
 
       <button type="submit">Create Customer</button>

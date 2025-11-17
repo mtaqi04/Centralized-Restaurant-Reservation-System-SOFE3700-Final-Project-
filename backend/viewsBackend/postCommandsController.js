@@ -1,4 +1,5 @@
 import { getPool } from '../models/db.js';
+import bcrypt from "bcrypt";
 import { getWeatherForLocation } from '../WeatherAPI/weatherService.js';
 
 export async function p_createReservation(req, res) {
@@ -89,10 +90,11 @@ export async function p_createCustomer(req, res) {
             full_name,
             email,
             phone,
+            password,
         } = req.body;
 
 
-        if (!full_name || !email || !phone) {
+        if (!full_name || !email || !phone || !password) {
             return res.status(400).json({
                 status: "error",
                 message: "Missing required fields",
@@ -127,16 +129,19 @@ export async function p_createCustomer(req, res) {
         };
 
 
+        const password_hash = await bcrypt.hash(password, 10);
+
         const [result] = await pool.query(
         `
             INSERT INTO Customer 
-                (full_name, email, phone)
-            VALUES (?, ?, ?)
+                (full_name, email, phone, password_hash)
+            VALUES (?, ?, ?, ?)
         `,
         [
             full_name,
             email,
             phone,
+            password_hash,
         ]
         );
 
